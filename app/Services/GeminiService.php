@@ -22,7 +22,7 @@ class GeminiService
     public function generateMetaDescription(string $title, string $content = ''): ?string
     {
         $prompt = <<<PROMPT
-        Write **only one** concise, SEO-friendly meta description (max 130 characters) for the following blog post.
+        Write **only one** concise, SEO-friendly meta description (max 150 characters) for the following blog post.
         Do not include multiple options, bullets, or headings — just return one clear sentence.
         
         Title: {$title}
@@ -44,7 +44,7 @@ class GeminiService
     public function generateMetaKeywords(string $title, string $content = ''): ?string
     {
         $prompt = <<<PROMPT
-        Write a concise SEO-friendly meta keywords (max 130 characters) for a blog post.
+        Write a concise SEO-friendly meta keywords (max 150 characters) for a blog post.
 
         Title: {$title}
 
@@ -62,21 +62,22 @@ class GeminiService
     public function generateFullDescription(string $title, string $content = ''): ?string
     {
         $prompt = <<<PROMPT
-            Write a detailed and SEO-friendly blog post description in HTML format.
-
-            Requirements:
-            - Use a main `<h1>` heading for the title
-            - Include meaningful `<h2>` subheadings
-            - Use `<p>` for content paragraphs
-            - Use `<ul><li>` for bullet point sections
-            - Do not include any <meta> tags or `content` attributes
-            - Return only clean HTML markup (no wrapping in other tags)
-
+            You are a professional SEO content writer.
+            
+            Write a clean, structured **HTML product description** using the following formatting rules:
+            
+            - Don't Use `<h1>` it is already includede in title so
+            - Use exactly two `<h2>` headings for key sections
+            - Use `<h3>` and `<h4>` for additional nested subtopics as needed
+            - Use `<p>` for all paragraphs
+            - Use `<ul><li>` for features, specs, or benefits
+            - Return only **valid HTML markup**
+            - **Do NOT** include `<meta>`, `<script>`, or markdown wrappers like ```html
+            
             Title: {$title}
-
-            Content:
-            {$content}
-            PROMPT;
+            
+            Content: {$content}
+        PROMPT;
 
         return $this->sendPrompt($prompt);
     }

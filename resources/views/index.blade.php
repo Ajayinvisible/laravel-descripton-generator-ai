@@ -22,15 +22,15 @@
                 @foreach ($posts as $post)
                     <div class="col-lg-12">
                         <div class="card p-4 mb-4">
-                            <h4>{{ $post->title }}</h4>
+                            <h1>{{ $post->title }}</h1>
                             <hr>
-                            <h6>{!! $post->meta_keywords !!}</h6>
+                            <p><strong>Meta Keywords</strong> : {!! $post->meta_keywords !!}</p>
                             <hr>
-                            <h6>{!! $post->meta_description !!}</h6>
+                            <p><strong>Meta Description</strong> : {!! $post->meta_description !!}</p>
                             <hr>
                             <p>{!! $post->description !!}</p>
                             <hr>
-                            <img src="{{ $post->image }}" width="100px" height="100px"
+                            <img src="{{ asset('storage/' . $post->image) }}" width="100px" height="100px"
                                 class="object-fit-cover rounded" alt="{{ $post->title }}">
                             <a href="{{ route('edit.post', $post->id) }}" class="btn btn-primary">Edit</a>
                         </div>
