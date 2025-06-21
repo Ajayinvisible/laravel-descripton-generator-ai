@@ -19,13 +19,14 @@
                 <a href="{{ route('show.post') }}" class="btn btn-dark">All Posts</a>
             </div>
             <hr>
-            <form action="{{ route('store.post') }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('update.post',$post->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="mb-3">
                             <label for="" class="form-label">Title</label>
-                            <input type="text" name="title" id="title" class="form-control">
+                            <input type="text" name="title" id="title" value="{{ $post->title }}" class="form-control">
                         </div>
                         @error('title')
                             <small class="text-danger">{{ $message }}</small>
@@ -34,7 +35,7 @@
                     <div class="col-lg-6">
                         <div class="mb-3">
                             <label for="meta_keywords" class="form-label">Meta Keywords</label>
-                            <input type="text" name="meta_keywords" id="meta_keywords" class="form-control">
+                            <input type="text" name="meta_keywords" id="meta_keywords" value="{{ $post->meta_keywords }}" class="form-control">
                         </div>
                         @error('meta_keywords')
                             <small class="text-danger">{{ $message }}</small>
@@ -43,7 +44,7 @@
                     <div class="col-lg-6">
                         <div class="mb-3">
                             <label for="meta_description" class="form-label">Meta Descripton</label>
-                            <input type="text" name="meta_description" id="meta_description" class="form-control">
+                            <input type="text" name="meta_description" id="meta_description" value="{{ $post->meta_description }}" class="form-control">
                         </div>
                         @error('meta_description')
                             <small class="text-danger">{{ $message }}</small>
@@ -52,7 +53,7 @@
                     <div class="col-lg-12">
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
-                            <textarea name="description" id="description" cols="30" rows="10" class="form-control"></textarea>
+                            <textarea name="description" id="description" cols="30" rows="10" class="form-control">{{ $post->description }}</textarea>
                         </div>
                         @error('description')
                             <small class="text-danger">{{ $message }}</small>
@@ -68,7 +69,7 @@
                         @enderror
                     </div>
                     <div class="col-lg-12 mt-3">
-                        <button class="btn btn-primary w-100">Create</button>
+                        <button class="btn btn-primary w-100">Update</button>
                     </div>
                 </div>
             </form>
